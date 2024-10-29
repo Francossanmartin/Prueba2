@@ -12,18 +12,18 @@
 #' grafico <- grafico_temperatura_mensual(datos)
 #' print(grafico)
 #' 
-grafico_temperatura_mensual <- function(datos, titulo = "Temperatura") {
+grafico_temperatura_mensual <- function(datos, titulo = "Temperatura", colores = NULL) {
   library(ggplot2)
   
   datos$mes <- format(as.Date(datos$fecha), "%Y-%m")
   promedio_mensual <- head(promedio_mensual <- aggregate(temperatura_abrigo_150cm ~ mes, data = datos, FUN = mean, na.rm = TRUE), 5)
   
   ggplot(promedio_mensual, aes(x = mes, y = temperatura_abrigo_150cm)) +
-    geom_bar(stat = "identity", fill = sample(colors(), 1)) +
+    geom_bar(stat = "identity", fill = if (is.null(colores)) sample(colors(), 1) else colores) +
     labs(title = titulo, x = "Mes", y = "Temperatura Promedio (°C)") +
     theme_minimal() +
     theme(axis.text.x = element_text(angle = 45, hjust = 1))
-}
+}  
 
 # Ejemplo de uso de la función
 datos <- read.csv("C:/Users/Usuario/Documents/Prueba2/data/NH0046.csv") # Reemplazar con el dataset deseado
