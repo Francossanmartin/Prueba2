@@ -1,18 +1,25 @@
-descargar_leer_datos_estacion <- function(id_estacion, ruta_archivo) {
-  estaciones_urls <- list(
-    NH0472 = "https://raw.githubusercontent.com/rse-r/intro-programacion/main/datos/NH0472.csv",
-    NH0910 = "https://raw.githubusercontent.com/rse-r/intro-programacion/main/datos/NH0910.csv",
-    NH0046 = "https://raw.githubusercontent.com/rse-r/intro-programacion/main/datos/NH0046.csv",
-    NH0098 = "https://raw.githubusercontent.com/rse-r/intro-programacion/main/datos/NH0098.csv",
-    NH0437 = "https://raw.githubusercontent.com/rse-r/intro-programacion/main/datos/NH0437.csv"
-  )
-  
-  url_base <- estaciones_urls[[id_estacion]]
-  
-  download.file(url_base, ruta_archivo)
-  
-  datos_estacion <- read.csv(ruta_archivo)
-  
-  return(datos_estacion)
-}
 
+read_datasets <- function(id_station = NULL, path = NULL) {
+  
+  if (is.null(path)) {
+    if (is.null(id_station)) {
+      stop("Either 'id_station' or 'path' must be provided.")
+    }
+  }
+  
+  if (is.null(path)) {
+    path <- file.path("datasets-raw", paste0(id_station, ".csv"))
+  }
+  
+  if (file.exists(path)) {
+    data <- read.csv(path)
+    
+    if (!is.null(id_station)) {
+      assign(id_station, data, envir = parent.frame())
+    }
+    
+    return(data)
+  } else {
+    stop("The file or path doesn't exist. Please check again; you only need to enter one argument.")
+  }
+}
