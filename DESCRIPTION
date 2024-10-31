@@ -2,11 +2,10 @@ Package: Prueba2
 Title: Paquete De San Martin
 Version: 0.0.0.9000
 Authors@R: 
-  person("Franco", "San Martin", email = "francosanmartin755@gmail.com", role = c("aut", "cre")),
-  person("Jeronimo", "Ballina", email = "jeronimoballina@gmail.com", role = "aut"))
-Description: Este paquete es para la prueba de programacion.
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+    c(person("Franco", "San Martin", email = "francosanmartin755@gmail.com", role = c("aut", "cre")),
+      person("Jeronimo", "Ballina", email = "jeronimoballina@gmail.com", role = "aut"))
+Description: Este paquete es para la prueba de programación.
+License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
